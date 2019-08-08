@@ -1,0 +1,1 @@
+<annotation><filename>fccde2029a159934.jpg</filename><folder>images</folder><size><width>683</width><height>1024</height><depth>3</depth></size><object><name>Person</name><pose>Unspecified</pose><truncated>0</truncated><difficult>0</difficult><bndbox><xmin>424.453082</xmin><ymin>661.393408</ymin><xmax>484.730564</xmax><ymax>769.956864</ymax></bndbox></object></annotation>

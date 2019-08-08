@@ -1,0 +1,1 @@
+<annotation><filename>ccca79f1e7646f88.jpg</filename><folder>images</folder><size><width>1024</width><height>683</height><depth>3</depth></size><object><name>Person</name><pose>Unspecified</pose><truncated>0</truncated><difficult>0</difficult><bndbox><xmin>0.0</xmin><ymin>263.381192</ymin><xmax>1023.991808</xmax><ymax>682.994536</ymax></bndbox></object></annotation>

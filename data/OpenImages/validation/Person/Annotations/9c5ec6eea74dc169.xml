@@ -1,0 +1,1 @@
+<annotation><filename>9c5ec6eea74dc169.jpg</filename><folder>images</folder><size><width>1024</width><height>515</height><depth>3</depth></size><object><name>Person</name><pose>Unspecified</pose><truncated>0</truncated><difficult>0</difficult><bndbox><xmin>432.64614400000005</xmin><ymin>173.7095</ymin><xmax>591.35488</xmax><ymax>394.022895</ymax></bndbox></object></annotation>
