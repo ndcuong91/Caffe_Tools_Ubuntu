@@ -17,7 +17,7 @@ layer {
     mean_value: 128
   }
   data_param {
-    source: "/home/atsg/PycharmProjects/gvh205/Object_detection_Caffe/data/Face_custom/lmdb/Face_custom_train_lmdb"
+    source: "/home/atsg/PycharmProjects/gvh205/Caffe_Tools_Ubuntu/data/classification/Face_custom/lmdb/train_lmdb"
     batch_size: 64
     backend: LMDB
   }
@@ -40,8 +40,8 @@ layer {
     mean_value: 128
   }
   data_param {
-    source: "/home/atsg/PycharmProjects/gvh205/Object_detection_Caffe/data/Face_custom/lmdb/Face_custom_val_lmdb"
-    batch_size: 20
+    source: "/home/atsg/PycharmProjects/gvh205/Caffe_Tools_Ubuntu/data/classification/Face_custom/lmdb/val_lmdb"
+    batch_size: 32
     backend: LMDB
   }
 }
