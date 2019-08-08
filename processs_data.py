@@ -21,7 +21,7 @@ def create_dir(dir):
         print 'Finish make dir:',dir
 
 def create_train_val_detection(shuffle=True, train_ratio=0.8):
-    dataset_dir='/home/atsg/PycharmProjects/gvh205/Object_detection_Caffe/data/OpenImages/validation'
+    dataset_dir='/home/atsg/PycharmProjects/gvh205/Caffe_Tools_Ubuntu/data/OpenImages/validation'
     img_dir = os.path.join(dataset_dir, 'Person/JPEGImages')
     ano_dir = os.path.join(dataset_dir, 'Person/Annotations')
     txt_dir=os.path.join(dataset_dir, 'Person/ImageSets/Main')
@@ -48,7 +48,7 @@ def create_train_val_detection(shuffle=True, train_ratio=0.8):
 def create_dataset(num_img=355):
     count=0
     src_dir='/media/atsg/Data/datasets/face_recognition/lfw'
-    dst_dir='/home/atsg/PycharmProjects/gvh205/Object_detection_Caffe/data/Face_custom/original/1'
+    dst_dir='/home/atsg/PycharmProjects/gvh205/Caffe_Tools_Ubuntu/data/Face_custom/original/1'
     list_dir=get_list_dir_in_folder(src_dir)
     for sub_dir in list_dir:
         list_img = get_list_file_in_folder(os.path.join(src_dir, sub_dir))
@@ -65,7 +65,7 @@ def create_dataset(num_img=355):
 
     count=0
     src_dir='/home/atsg/PycharmProjects/gvh205/arm_proj/to_customer/GVH205_ARM_project_training_environment/dataset/getty_dataset2_resize300/train/dirty'
-    dst_dir='/home/atsg/PycharmProjects/gvh205/Object_detection_Caffe/data/Face_custom/original/0'
+    dst_dir='/home/atsg/PycharmProjects/gvh205/Caffe_Tools_Ubuntu/data/Face_custom/original/0'
     list_img = get_list_file_in_folder(os.path.join(src_dir))
     for img in list_img:
         src_file = os.path.join(src_dir, img)
@@ -83,7 +83,7 @@ def create_dataset(num_img=355):
 
 def create_train_val_classification(shuffle=True, train_ratio=0.8):
     print 'Create train val folder from original folder with train_ratio:',train_ratio
-    dataset_dir='/home/atsg/PycharmProjects/gvh205/Object_detection_Caffe/data/classification/Face_custom'
+    dataset_dir='/home/atsg/PycharmProjects/gvh205/Caffe_Tools_Ubuntu/data/classification/Face_custom'
     img_dir=os.path.join(dataset_dir,'original')
     train_dir=os.path.join(dataset_dir,'train')
     val_dir=os.path.join(dataset_dir,'val')
@@ -124,7 +124,7 @@ def create_train_val_classification(shuffle=True, train_ratio=0.8):
 
 def merge_train_val_classification():
     print 'Move file from train val folder to original folder'
-    dataset_dir = '/home/atsg/PycharmProjects/gvh205/Object_detection_Caffe/data/classification/Face_custom'
+    dataset_dir = '/home/atsg/PycharmProjects/gvh205/Caffe_Tools_Ubuntu/data/classification/Face_custom'
     train_dir = os.path.join(dataset_dir, 'train')
     val_dir = os.path.join(dataset_dir, 'val')
     img_dir = os.path.join(dataset_dir, 'original')
@@ -154,7 +154,7 @@ if __name__ == "__main__":
 
     #create_train_val_txt(img_dir,ano_dir)
     #create_train_val_detection()
-    #create_train_val_classification()
-    merge_train_val_classification()
+    create_train_val_classification()
+    #merge_train_val_classification()
     #create_dataset()
     print('Finish')

@@ -1,0 +1,42 @@
+#facedet3_bbn.caffemodel
+
+#mean=0,0,0
+Class: 0 , Accuracy: 0.96625
+Class: 1 , Accuracy: 0.705
+Final accuracy: 0.835625
+
+#mean + center crop
+Class: 0 , Accuracy: 0.98
+Class: 1 , Accuracy: 0.94875
+Final accuracy: 0.964375
+
+#facedet_iter_5000.caffemodel
+
+#mean=0,0,0
+Class: 0 , Accuracy: 0.79875
+Class: 1 , Accuracy: 0.8575
+Final accuracy: 0.828125
+
+#mean=128,128,128
+Class: 0 , Accuracy: 0.70875
+Class: 1 , Accuracy: 0.99375
+Final accuracy: 0.85125
+
+#mean+ center crop
+Class: 0 , Accuracy: 0.765
+Class: 1 , Accuracy: 0.99625
+Final accuracy: 0.880625
+
+#facedet_iter_5000_original.caffemodel
+
+#mean=128,128,128
+Class: 0 , Accuracy: 0.98
+Class: 1 , Accuracy: 0.66375
+Final accuracy: 0.821875
+
+#facedet_iter_2500.caffemodel
+
+mean+center crop
+Class: 0 , Accuracy: 0.95375
+Class: 1 , Accuracy: 0.975
+Final accuracy: 0.964375

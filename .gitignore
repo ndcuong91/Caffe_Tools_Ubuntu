@@ -1,3 +1,7 @@
 #lmdb dataset
 *.mdb
 *.lmdb
+
+# caffe model
+*.caffemodel
+*.solverstate

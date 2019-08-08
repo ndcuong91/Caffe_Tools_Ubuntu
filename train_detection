@@ -1,0 +1,3 @@
+./build/tools/caffe train --solver=examples/bnn/facedet_solver.prototxt
+#./build/tools/caffe train --solver=examples/mnist/lenet_solver.prototxt
+
