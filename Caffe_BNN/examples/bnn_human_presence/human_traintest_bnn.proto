@@ -1,0 +1,280 @@
+name: "HumanPresence_bnn"
+layer {
+  name: "data"
+  type: "Data"
+  top: "data"
+  top: "label"
+  include {
+    phase: TRAIN
+  }
+  transform_param {
+    mirror: true
+    contrast_adjust: true
+    color_distort: false
+    crop_size: 32
+    mean_value: 128
+    mean_value: 128
+    mean_value: 128
+  }
+  data_param {
+    source: "/home/duycuong/PycharmProjects/research_py2/Caffe_Tools_Ubuntu/data/classification/Human_presence_custom/lmdb/train_lmdb"
+    batch_size: 64
+    backend: LMDB
+  }
+}
+layer {
+  name: "data"
+  type: "Data"
+  top: "data"
+  top: "label"
+  include {
+    phase: TEST
+    #stage: "val"
+  }
+  transform_param {
+    mirror: false
+    color_distort: false
+    crop_size: 32
+    mean_value: 128
+    mean_value: 128
+    mean_value: 128
+  }
+  data_param {
+    source: "/home/duycuong/PycharmProjects/research_py2/Caffe_Tools_Ubuntu/data/classification/Human_presence_custom/lmdb/val_lmdb"
+    batch_size: 32
+    backend: LMDB
+  }
+}
+
+#####################################
+# Network
+#####################################
+layer {
+  name: "conv1"
+  type: "BinaryConvolution"
+  bottom: "data"
+  top: "conv1"
+  convolution_param {
+    #num_output: 64
+    num_output: 16
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_term: false
+  }
+  quantize_param {
+    normalize_weights: true
+  }
+}
+layer {
+  name: "bn1"
+  type: "BatchNorm"
+  bottom: "conv1"
+  top: "bn1"
+}
+layer {
+  name: "scale1"
+  type: "Scale"
+  bottom: "bn1"
+  top: "norm1"
+  param { lr_mult: 1 }
+  param { lr_mult: 2 }
+  scale_param {
+    filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+    bias_term: true
+  }
+}
+layer {
+  name: "qrelu1"
+  type: "QuantReLU"
+  bottom: "norm1"
+  top: "Q-norm1"
+  quantize_param {
+    num_bit: 1
+  }
+}
+layer {
+  name: "pool1"
+  type: "Pooling"
+  bottom: "Q-norm1"
+  top: "Q-pool1"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+    pad: 0
+  }
+}
+layer {
+  name: "conv2"
+  type: "BinaryConvolution"
+  bottom: "Q-pool1"
+  top: "conv2"
+  convolution_param {
+    #num_output: 64
+    num_output: 32
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_term: false
+  }
+  quantize_param {
+    normalize_weights: true
+  }
+}
+layer {
+  name: "bn2"
+  type: "BatchNorm"
+  bottom: "conv2"
+  top: "bn2"
+}
+layer {
+  name: "scale2"
+  type: "Scale"
+  bottom: "bn2"
+  top: "norm2"
+  param { lr_mult: 1 }
+  param { lr_mult: 2 }
+  scale_param {
+    filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+      value: 0.1
+    }
+    bias_term: true
+  }
+}
+layer {
+  name: "qrelu2"
+  type: "QuantReLU"
+  bottom: "norm2"
+  top: "Q-norm2"
+  quantize_param {
+    num_bit: 1
+  }
+}
+layer {
+  name: "pool2"
+  type: "Pooling"
+  bottom: "Q-norm2"
+  top: "Q-pool2"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+    pad: 0
+  }
+}
+layer {
+  name: "conv3"
+  type: "BinaryConvolution"
+  bottom: "Q-pool2"
+  top: "conv3"
+  convolution_param {
+    #num_output: 128
+    num_output: 64
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "xavier"
+    }
+    bias_term: false
+  }
+  quantize_param {
+    normalize_weights: true
+  }
+}
+layer {
+  name: "bn3"
+  type: "BatchNorm"
+  bottom: "conv3"
+  top: "bn3"
+}
+layer {
+  name: "scale3"
+  type: "Scale"
+  bottom: "bn3"
+  top: "norm3"
+  param { lr_mult: 1 }
+  param { lr_mult: 2 }
+  scale_param {
+    filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+    bias_term: true
+  }
+}
+layer {
+  name: "qrelu3"
+  type: "QuantReLU"
+  bottom: "norm3"
+  top: "Q-norm3"
+  quantize_param {
+    num_bit: 1
+  }
+}
+#layer {
+#  name: "drop3"
+#  type: "Dropout"
+#  bottom: "Q-norm3"
+#  top: "Q-norm3"
+#  dropout_param {
+#    dropout_ratio: 0.5
+#  }
+#}
+layer {
+  name: "fc4"
+  type: "BinaryInnerProduct"
+  bottom: "Q-norm3"
+  top: "prob"
+  inner_product_param {
+    num_output: 2
+    weight_filler {
+      type: "xavier"
+    }
+    bias_filler {
+      type: "constant"
+      value: 0.1
+    }
+  }
+}
+#####################################
+# Loss
+#####################################
+layer {
+  name: "accuracy"
+  type: "Accuracy"
+  bottom: "prob"
+  bottom: "label"
+  top: "accuracy"
+}
+layer {
+  name: "loss"
+  type: "SoftmaxWithLoss"
+  bottom: "prob"
+  bottom: "label"
+  top: "loss"
+  #exclude {
+  #  phase: TEST
+  #  not_stage: "val"
+  #}
+}

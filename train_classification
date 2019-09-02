@@ -1,3 +1,3 @@
-./build/tools/caffe train --solver=examples/bnn/facedet_solver.prototxt
+./Caffe_BNN/build/tools/caffe train --solver=Caffe_BNN/examples/bnn_human_presence/human_solver.prototxt
 #./build/tools/caffe train --solver=examples/mnist/lenet_solver.prototxt
 

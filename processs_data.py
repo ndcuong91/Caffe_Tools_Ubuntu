@@ -2,7 +2,7 @@ import os, cv2
 import random,shutil
 
 def get_list_file_in_folder(dir, ext='jpg'):
-    included_extensions = [ext]
+    included_extensions = ['jpg','png']
     file_names = [fn for fn in os.listdir(dir)
                   if any(fn.endswith(ext) for ext in included_extensions)]
     return file_names
@@ -44,7 +44,6 @@ def create_train_val_detection(shuffle=True, train_ratio=0.8):
     save_file(os.path.join(txt_dir,'trainval.txt'),train_val_txt)
     save_file(os.path.join(txt_dir,'test.txt'),test_txt)
 
-
 def create_dataset(num_img=355):
     count=0
     src_dir='/media/atsg/Data/datasets/face_recognition/lfw'
@@ -83,7 +82,7 @@ def create_dataset(num_img=355):
 
 def create_train_val_classification(shuffle=True, train_ratio=0.8):
     print 'Create train val folder from original folder with train_ratio:',train_ratio
-    dataset_dir='/home/atsg/PycharmProjects/gvh205/Caffe_Tools_Ubuntu/data/classification/Face_custom'
+    dataset_dir='/home/duycuong/PycharmProjects/research_py2/Caffe_Tools_Ubuntu/data/classification/Human_presence_custom'
     img_dir=os.path.join(dataset_dir,'original')
     train_dir=os.path.join(dataset_dir,'train')
     val_dir=os.path.join(dataset_dir,'val')
@@ -101,7 +100,7 @@ def create_train_val_classification(shuffle=True, train_ratio=0.8):
         print dir
         create_dir(os.path.join(train_dir, dir))
         create_dir(os.path.join(val_dir, dir))
-        list_file=get_list_file_in_folder(os.path.join(img_dir, dir))
+        list_file=get_list_file_in_folder(os.path.join(img_dir, dir), ext='png')
         total_img=len(list_file)
         num_train_img=int(train_ratio*total_img)
         count=0

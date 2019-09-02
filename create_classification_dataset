@@ -2,9 +2,9 @@
 # Create the imagenet lmdb inputs
 # N.B. set the path to the imagenet train + val data dirs
 
-TOOLS=build/tools/ubuntu16.04_cuda9.0
+TOOLS=/home/duycuong/PycharmProjects/research_py2/caffe-1.0/build/tools
 
-DATA=data/classification/Face_custom
+DATA=data/classification/Human_presence_custom
 TRAIN_DATA_ROOT=$DATA/train/
 VAL_DATA_ROOT=$DATA/val/
 LMDB_DIR=$DATA/lmdb
@@ -12,8 +12,8 @@ LMDB_DIR=$DATA/lmdb
 # Set RESIZE=true to resize the images to . Leave as false if images have already been resized using another tool.
 RESIZE=true
 if $RESIZE; then
-  RESIZE_HEIGHT=60
-  RESIZE_WIDTH=60
+  RESIZE_HEIGHT=32
+  RESIZE_WIDTH=32
 else
   RESIZE_HEIGHT=0
   RESIZE_WIDTH=0
